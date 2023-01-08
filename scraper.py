@@ -40,7 +40,7 @@ class Scraper:
 
         try:
             if response['meta']['result_count'] == 0:
-                print (f'No new tweets since last check for {accountName}, last tweet id: {self.lastTweet[accountName]}')
+                print (f'No new tweets since last check for {accountName} at t = {time.time()}, last tweet id: {self.lastTweet[accountName]}')
                 return []
             
             self.lastTweet[accountName] = response['meta']['newest_id']
