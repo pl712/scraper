@@ -1,15 +1,15 @@
 import time
-from scraper import Scraper
-from httpserver import RESTful
 
 class Message:
-    def __init__(self, id, msgText, msgTime, msgSender, msgQuality, msgPic = None, msgHashTags = None, msgClassificationTags = None):
+    def __init__(self, id, msgText, msgTime, msgStats, msgSender, msgQuality = -2, msgMedia = [], msgHashTags = [], msgClassificationTags = []):
         self.id = id
         self.msgText = msgText
         self.msgTime = msgTime
+        self.stats = msgStats
         self.msgSender = msgSender
+
         self.msgQuality = msgQuality
-        self.msgPic = msgPic
+        self.msgMedia = msgMedia
         self.msgHashTags = msgHashTags
         self.msgClassificationTags = msgClassificationTags
 
@@ -17,8 +17,9 @@ class Message:
         return {'text' : self.msgText, 
                 'time' : self.msgTime, 
                 'sender' : self.msgSender, 
-                'quality' : self.msgQuality, # -1 0 1
-                'pic' : self.msgPic, 
+                'stats' : self.stats,
+                'quality' : self.msgQuality,
+                'media' : self.msgMedia,
                 'hashTags' : self.msgHashTags, 
                 'classificationTags' : self.msgClassificationTags}
 
@@ -40,10 +41,10 @@ class Topic:
 class UserAccount:
     def __init__(self, password):
         self.password = password
-        self.subList = {} # topic name : topic object
+        self.subList = {} # topic name : topic sensitivity
     
-    def addSub(self, topicName, topicObj):
-        self.subList[topicName] = topicObj
+    def addSub(self, topicName, sensitivity = 0):
+        self.subList[topicName] = sensitivity
     
     def removeSub(self, topicName):
         del self.subList[topicName]
@@ -64,8 +65,11 @@ class Interface:
         self.userList[userName] = UserAccount(password)
     
     #subscribe
-    def userSubscribe(self, userName, topicName):
-        self.userList[userName].addSub(topicName, self.topicList[topicName])
+    def userSubscribe(self, userName, topicName, sensitivity):
+        self.userList[userName].addSub(topicName, sensitivity)
+
+    def userChangeSensitivity(self, userName, topicName, sensitivity):
+        self.userList[userName].subList[topicName] = sensitivity
 
     def userUnsubscribe(self, userName, topicName):
         self.userList[userName].removeSub(topicName)
@@ -76,27 +80,19 @@ class Interface:
 
     #application
     def getUserTopics(self, userName):
-        return list(self.userList[userName].subList.keys())
+        return self.userList[userName].subList
 
-    def getMessagesByTopic(self, topicName):
+    def getMessagesByTopic(self, topicName, sensitivity):
         lst = []
 
         for msg in self.topicList[topicName].msgList:
-            lst.append(msg.getMsg())
+            if msg.msgQuality >= sensitivity:
+                lst.append(msg.getMsg())
         
         return lst
 
-    def addMessageToTopic(self, topicName, **kwargs):
-        newMsg = Message(kwargs['id'], kwargs['msgText'], kwargs['msgTime'], kwargs['msgSender'], kwargs['msgQuality'], kwargs['msgPic'], kwargs['msgHashTags'], kwargs['msgClassificationTags'])
-        
-        self.topicList[topicName].addMsg(newMsg)
+    def addMessageToTopic(self, topicName, newMsg):  
+        if topicName not in self.topicList:
+            self.addTopic(topicName)      
+        self.topicList[topicName].addMsg(newMsg.id, newMsg)
 
-class mainProgram:
-    def __init__(self):
-        self.program = Interface()
-        self.server = RESTful(self.program)
-        self.scraper = Scraper(self.program, listOfUsers = ['POTUS'])
-
-    def main(self):
-        self.scraper.run()
-        self.server.run()
