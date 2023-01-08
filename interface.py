@@ -79,7 +79,7 @@ class Interface:
         self.topicList[topicName] = Topic(topicName)
 
     #application
-    def getUserTopics(self, userName):
+    def getTopicsByUser(self, userName):
         return self.userList[userName].subList
 
     def getMessagesByTopic(self, topicName, sensitivity):
