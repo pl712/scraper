@@ -53,23 +53,32 @@ class Scraper:
         while True:
             for account in self.listOfAccounts:
                 tweets = self.getTweet(account)
+                
                 if tweets != []:
                     for tweet in tweets:
-                        currMsg = Message(tweet['id'], tweet['text'], tweet['created_at'], tweet['public_metrics'], account)
-                        
+
+                        imgList, hashList = [], []
+
                         if 'entities' in tweet: #media links and hashtags
+                            
                             if 'urls' in tweet['entities']:
                                 for i in tweet['entities']['urls']:
-                                    currMsg.msgMedia.append(i['url'])
+                                    imgList.append(i['url'])
+
                             if 'hashtags' in tweet['entities']:
                                 for i in tweet['entities']['hashtags']:
-                                    currMsg.msgHashTags.append(i['tag'])
+                                    hashList.append(i['tag'])
+                        
+                        currMsg = Message(tweet['id'], tweet['text'], tweet['created_at'], tweet['public_metrics'], account, msgMedia=imgList, msgHashTags=hashList)
 
                         if 'context_annotations' in tweet: # classification tags
-                            currMsg.msgClassificationTags = ['context_annotations']
+                            currMsg.msgClassificationTags = tweet['context_annotations']
 
                         currMsg.msgQuality = self.cat.setQuality(currMsg) #filtering - getting quality
 
                         self.program.addMessageToTopic(self.cat.setCategory(currMsg), currMsg)
+
+            # for i in self.program.topicList['general-topic'].msgList: #-> Yes it works
+            #     print (self.program.topicList['general-topic'].msgList[i].getMsg())
 
             time.sleep(300) #runs every 5 minutes
