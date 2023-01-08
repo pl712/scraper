@@ -85,9 +85,9 @@ class Interface:
     def getMessagesByTopic(self, topicName, sensitivity):
         lst = []
 
-        for msg in self.topicList[topicName].msgList:
-            if msg.msgQuality >= sensitivity:
-                lst.append(msg.getMsg())
+        for id in self.topicList[topicName].msgList:
+            if id.msgQuality >= sensitivity:
+                lst.append(self.topicList[topicName].msgList[id].getMsg())
         
         return lst
 

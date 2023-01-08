@@ -78,7 +78,8 @@ class Scraper:
 
                         self.program.addMessageToTopic(self.cat.setCategory(currMsg), currMsg)
 
-            # for i in self.program.topicList['general-topic'].msgList: #-> Yes it works
-            #     print (self.program.topicList['general-topic'].msgList[i].getMsg())
+            for i in self.program.topicList['general-topic'].msgList: #-> Yes it works
+                print (self.program.topicList['general-topic'].msgList[i].getMsg())
+                print ("\n")
 
             time.sleep(300) #runs every 5 minutes
