@@ -10,7 +10,7 @@ class RESTful:
         @app.route('/register/<userName>/<password>')
         def register(userName, password):
             self.program.addUser(userName, password)
-            return 0
+            return "User registered successfully"
 
         @app.route('/login/<userName>/<password>')
         def login(userName, password):
@@ -49,4 +49,5 @@ class RESTful:
         def getMessages(topicName, sensitivity):
             return self.program.getMessagesByTopic(topicName, sensitivity)
 
-        app.run()
+        app.run(debug=True)
+        
