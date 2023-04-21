@@ -7,7 +7,11 @@ class mainProgram:
     def __init__(self):
         self.program = Interface()
         self.server = RESTful(self.program)
-        self.scraper = Scraper(self.program, listOfAccounts = ['paradigm','a16z','sequoia','Stepnofficial','MantaNetwork','okxweb3','binance','kucoincom','cz_binance','twobitidiot'])
+        non_web3 = ['elonmusk', 'POTUS', 'BillGates', 'sama', 'zlj517']
+        big_orgs = ['paradigm','a16z','sequoia','Stepnofficial','MantaNetwork','okxweb3','binance','kucoincom','cz_binance','twobitidiot']
+        small_orgs = []
+        self.accounts = non_web3 + big_orgs + small_orgs
+        self.scraper = Scraper(self.program, listOfAccounts = self.accounts)
 
     def run_scraper(self):
         self.scraper.run()

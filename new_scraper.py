@@ -26,7 +26,7 @@ class Scraper:
     def run(self):
         print("Scraper running")
         for account in self.listOfAccounts:
-            user_timeline = self.api.user_timeline(screen_name=account, count=1, tweet_mode='extended')
+            user_timeline = self.api.user_timeline(screen_name=account, count=20, tweet_mode='extended')
             for tweet in user_timeline:
                 if hasattr(tweet, 'retweeted_status'):
                     # If it's a retweet, store the retweeted_status object instead
@@ -35,7 +35,7 @@ class Scraper:
                     self.user_tweets[account].append(tweet)
     
     def save_tweets_to_csv(self):
-        with open(f'tweets.csv', 'w', newline='') as f:
+        with open(f'tweets/tweets_web3_big_figures.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['user','tweet_content'])
             for account in self.user_tweets:
