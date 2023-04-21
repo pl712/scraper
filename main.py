@@ -9,8 +9,9 @@ class mainProgram:
         self.server = RESTful(self.program)
         non_web3 = ['elonmusk', 'POTUS', 'BillGates', 'sama', 'zlj517']
         big_orgs = ['paradigm','a16z','sequoia','Stepnofficial','MantaNetwork','okxweb3','binance','kucoincom','cz_binance','twobitidiot']
-        small_orgs = []
-        self.accounts = non_web3 + big_orgs + small_orgs
+        projects = ['Nakamigos', 'TheMuppethShow', 'Cat_Mouse_game', 'Ronin_Network', 'ZooDAO']
+        research = ['zachxbt', 'jphackworth42', 'drakefjustin', 'BTC__options']
+        self.accounts = non_web3 + big_orgs + projects + research
         self.scraper = Scraper(self.program, listOfAccounts = self.accounts)
 
     def run_scraper(self):
