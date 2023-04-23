@@ -1,5 +1,9 @@
 # Filtered Twitter
 
+DEMO Video Link: https://drive.google.com/file/d/1v3NmrgSW0Pj6dVYo32JZOhJeB70g3dpT/view
+
+## Project Description
+Our team was inspired to develop the Crypto News Aggregator because we noticed that researching cryptocurrency news using Twitter can be challenging due to the abundance of information and lack of efficient search functionality. We saw an opportunity to create a tool that filters Twitter messages into different categories based on their relevance to cryptocurrency news and research. This way, users can quickly and easily find the information they need without having to sift through irrelevant content.
 
 ## How to run the Twitter scraper and chatGPT labeling
 
