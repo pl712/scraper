@@ -12,7 +12,7 @@ function App() {
       <Sidebar />
       <Feed />
       {/* <Widgets /> */}
-      <RightPanel />
+      {/* <RightPanel /> */}
     </div>
   );
 }
