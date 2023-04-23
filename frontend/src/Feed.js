@@ -19,7 +19,7 @@ function Feed({ category }) {
   return (
     <div className="feed">
       <div className="feed__header">
-        <h2>Filtered Tweets</h2>
+        <h2>Crypto News Aggregator</h2>
       </div>
 
       <TweetBox />
