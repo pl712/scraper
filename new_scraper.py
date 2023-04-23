@@ -28,7 +28,7 @@ class Scraper:
     def run(self):
         print("Scraper running")
         for account in self.listOfAccounts:
-            user_timeline = self.api.user_timeline(screen_name=account, count=20, tweet_mode='extended')
+            user_timeline = self.api.user_timeline(screen_name=account, count=5, tweet_mode='extended')
             for tweet in user_timeline:
                 if hasattr(tweet, 'retweeted_status'):
                     # If it's a retweet, store the retweeted_status object instead
@@ -37,7 +37,7 @@ class Scraper:
                     self.user_tweets[account].append(tweet)
 
     def getSinglePrediction(self, content) -> str:
-        openai.api_key = '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'
+        openai.api_key = os.environ.get("OPENAI_API_KEY")
         lstOfCategories = ['web3 activities and events', 'web3 announcements', 'web3 research output', 'web3 meme', 'crypto and markets', 'web3 phishing or irrelevant', 'unknown']
 
         response = openai.Completion.create(
@@ -52,6 +52,7 @@ class Scraper:
 
         try:
             result = response['choices'][0]['text']
+            print('Prediction: ', result[-len(result)+1:])
             return result[-len(result)+1:]
         except:
             return f"Error: {response}"
