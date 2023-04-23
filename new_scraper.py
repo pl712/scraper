@@ -1,3 +1,4 @@
+import random
 from interface import Message
 from dotenv import load_dotenv
 import csv 
@@ -28,7 +29,7 @@ class Scraper:
     def run(self):
         print("Scraper running")
         for account in self.listOfAccounts:
-            user_timeline = self.api.user_timeline(screen_name=account, count=5, tweet_mode='extended')
+            user_timeline = self.api.user_timeline(screen_name=account, count=10, tweet_mode='extended')
             for tweet in user_timeline:
                 if hasattr(tweet, 'retweeted_status'):
                     # If it's a retweet, store the retweeted_status object instead
@@ -87,6 +88,8 @@ class Scraper:
                             break
 
                 posts.append(post)
+        # shuffle the list posts
+        random.shuffle(posts)
         # save the tweet's text and media to a csv file for frontend usage
-        with open('frontend/src/data/real_posts.json', 'w') as file:
+        with open('frontend/src/data/posts_with_labels.json', 'w') as file:
             json.dump(posts, file, indent=4)

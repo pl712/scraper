@@ -3,35 +3,31 @@ import TweetBox from "./TweetBox";
 import Post from "./Post";
 import "./Feed.css";
 import FlipMove from "react-flip-move";
-import data from "./data/real_posts.json";
+import data from "./data/posts_with_labels.json";
 import axios from 'axios'
 
 
-function Feed() {
+function Feed({ category }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    // axios.get('/getMessages/general-topic/0').then(response => {
-    //   console.log("SUCCESS", response)
-    //   setPosts(response)
-    // }).catch(error => {
-    //   console.log(error)
-    // })
-    setPosts(data)
-  }, []);
+    setPosts([]);
+    const filteredData = category ? data.filter((post) => post.label === category) : data;
+    setPosts(filteredData);
+  }, [category]);
 
   return (
     <div className="feed">
       <div className="feed__header">
-        <h2>Home</h2>
+        <h2>Filtered Tweets</h2>
       </div>
 
       <TweetBox />
 
       <FlipMove>
-        {posts.map((post) => (
+        {posts.map((post,index) => (
           <Post
-            key={post.text}
+            key={index}
             displayName={post.displayName}
             username={post.username}
             verified={post.verified}
