@@ -5,9 +5,15 @@ from flask import Flask, request
 api_key = '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'
 
 '''
-from categorize import getSinglePrediction
-getSinglePrediction(api_key, 'This is a test tweet') -> string of category
-getListPrediction(api_key, ['This is a test tweet', 'This is another test tweet']) -> list of categories
+to run the script, run this:
+flask --app categorize run
+to access the endpoint, run this:
+url: {endpoint}/predict?key={api_key}&content={string of tweet}
+OR
+python:
+import requests
+url = f"{endpoint}/predict?key={api_key}&content={string of tweet}"
+requests.get(url)
 '''
 
 app = Flask(__name__)
