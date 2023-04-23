@@ -1,4 +1,4 @@
-# Filtered Twitter
+# Crypto News Aggregator
 
 DEMO Video Link: https://drive.google.com/file/d/1v3NmrgSW0Pj6dVYo32JZOhJeB70g3dpT/view
 
