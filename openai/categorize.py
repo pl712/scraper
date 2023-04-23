@@ -3,6 +3,12 @@ import pandas as pd
 
 api_key = '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'
 
+
+'''
+from categorize import getSinglePrediction
+getSinglePrediction(api_key, 'This is a test tweet') -> string of category
+'''
+
 def getSinglePrediction(apiKey, content):
   openai.api_key = apiKey
 
