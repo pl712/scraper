@@ -9,12 +9,21 @@
 ```
 pip install -r requirements.txt
 ```
-4. To run the twitter scraper and real-time labeling by chatGPT API, run the following command
+4. Create an .env file with the following variables. This requires a twitter developer account and an openai API key.
+```
+CONSUMER_KEY= <your twitter consumer key>
+CONSUMER_SECRET= <your twitter consumer secret>
+ACCESS_TOKEN= <your twitter access token>
+ACCESS_TOKEN_SECRET= <your twitter access token secret>
+OPENAI_API_KEY = <your openai api key>
+```
+
+5. To run the twitter scraper and real-time labeling by chatGPT API, run the following command
 
 ```
 python main.py
 ```
-5. This command will start the scraper and fetch the recent tweets from a few selected accounts related to crypto. In this version, we selected the following accounts:
+6. This command will start the scraper and fetch the recent tweets from a few selected accounts related to crypto. In this version, we selected the following accounts:
 
 ```
         non_web3 = ['elonmusk', 'POTUS', 'BillGates', 'sama', 'zlj517']
@@ -24,11 +33,11 @@ python main.py
         research = ['zachxbt', 'jphackworth42', 'drakefjustin', 'BTC__options']
 ```
 
-6. For each tweet it fetches, it will call the openai ChatGPT API to label the tweets among seven categories
+7. For each tweet it fetches, it will call the openai ChatGPT API to label the tweets among seven categories
 ```
 ['web3 activities and events', 'web3 announcements', 'web3 research output', 'web3 meme', 'crypto and markets', 'web3 phishing or irrelevant', 'unknown']
 ```
-7. The results is saved in JSON files for frontend rendering.
+8. The results is saved in JSON files for frontend rendering.
 
 
 
