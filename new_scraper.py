@@ -4,6 +4,7 @@ import csv
 import os
 import tweepy
 import collections
+import json
 
 class Scraper:
     def __init__(self, interfaceObject, listOfAccounts):
@@ -35,11 +36,33 @@ class Scraper:
                     self.user_tweets[account].append(tweet)
     
     def save_tweets_to_csv(self):
-        with open(f'tweets/tweets_web3_big_figures.csv', 'w', newline='') as f:
+        # Save the tweet's text to a csv file for chatGPT's usage 
+        with open(f'tweets/tweets_text_only.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['user','tweet_content'])
             for account in self.user_tweets:
                 for tweet in self.user_tweets[account]:
                     writer.writerow([account, tweet.full_text])
+        
+        posts = []
+        for account in self.user_tweets:
+            for tweet in self.user_tweets[account]:
+                post = {
+                    "displayName": tweet.user.name,
+                    "username": tweet.user.screen_name,
+                    "avatar": tweet.user.profile_image_url_https,
+                    "verified": tweet.user.verified,
+                    "image": None,
+                    "text": tweet.full_text
+                }
 
+                if 'media' in tweet.entities:
+                    for media in tweet.entities['media']:
+                        if media['type'] == 'photo':
+                            post['image'] = media['media_url_https']
+                            break
 
+                posts.append(post)
+        # save the tweet's text and media to a csv file for frontend usage
+        with open('frontend/src/data/real_posts.json', 'w') as file:
+            json.dump(posts, file, indent=4)

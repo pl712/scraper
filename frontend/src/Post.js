@@ -29,7 +29,9 @@ const Post = forwardRef(
               <p>{text}</p>
             </div>
           </div>
-          <img src={image} alt="" width="500" height="500"/>
+          {image ? (
+            <img src={image} alt="" width="500" height="500" />
+          ) : null}
           <div className="post__footer">
             <ChatBubbleOutlineIcon fontSize="small" />
             <RepeatIcon fontSize="small" />

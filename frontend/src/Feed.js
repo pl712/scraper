@@ -3,7 +3,7 @@ import TweetBox from "./TweetBox";
 import Post from "./Post";
 import "./Feed.css";
 import FlipMove from "react-flip-move";
-import data from "./data/posts.json";
+import data from "./data/real_posts.json";
 import axios from 'axios'
 
 
@@ -17,7 +17,7 @@ function Feed() {
     // }).catch(error => {
     //   console.log(error)
     // })
-    setPosts(data.posts)
+    setPosts(data)
   }, []);
 
   return (
