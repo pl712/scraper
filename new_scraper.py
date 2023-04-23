@@ -5,6 +5,7 @@ import os
 import tweepy
 import collections
 import json
+import openai
 
 class Scraper:
     def __init__(self, interfaceObject, listOfAccounts):
@@ -34,9 +35,30 @@ class Scraper:
                     self.user_tweets[account].append(tweet.retweeted_status)
                 else:
                     self.user_tweets[account].append(tweet)
-    
+
+    def getSinglePrediction(self, content) -> str:
+        openai.api_key = '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'
+        lstOfCategories = ['web3 activities and events', 'web3 announcements', 'web3 research output', 'web3 meme', 'crypto and markets', 'web3 phishing or irrelevant', 'unknown']
+
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=f"Decide which category the Tweet best classify as {lstOfCategories}.\n\nTweet: \"{content}\"\nCategory: ",
+            temperature=0,
+            max_tokens=60,
+            top_p=1,
+            frequency_penalty=0.5,
+            presence_penalty=0
+            )
+
+        try:
+            result = response['choices'][0]['text']
+            return result[-len(result)+1:]
+        except:
+            return f"Error: {response}"
+
     def save_tweets_to_csv(self):
         # Save the tweet's text to a csv file for chatGPT's usage 
+        print("Saving tweets to csv")
         with open(f'tweets/tweets_text_only.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['user','tweet_content'])
@@ -53,7 +75,8 @@ class Scraper:
                     "avatar": tweet.user.profile_image_url_https,
                     "verified": tweet.user.verified,
                     "image": None,
-                    "text": tweet.full_text
+                    "text": tweet.full_text,
+                    "label": self.getSinglePrediction(tweet.full_text),
                 }
 
                 if 'media' in tweet.entities:

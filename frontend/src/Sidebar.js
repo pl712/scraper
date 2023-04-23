@@ -13,18 +13,20 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
 
 function Sidebar() {
+  // 'web3 activities and events', 'web3 announcements', 'web3 research output', 
+  // 'web3 meme', 'crypto and markets', 'web3 phishing or irrelevant', 'unknown'
   return (
     <div className="sidebar">
       <TwitterIcon className="sidebar__twitterIcon" />
 
-      <SidebarOption active Icon={HomeIcon} text="Home" />
-      <SidebarOption Icon={SearchIcon} text="Explore" />
-      <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-      <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
-      <SidebarOption Icon={ListAltIcon} text="Lists" />
-      <SidebarOption Icon={PermIdentityIcon} text="Profile" />
-      <SidebarOption Icon={MoreHorizIcon} text="More" />
+      <SidebarOption active Icon={HomeIcon} text="Categories:" />
+      <SidebarOption Icon={SearchIcon} text="web3 activities and events" />
+      <SidebarOption Icon={NotificationsNoneIcon} text="web3 announcements" />
+      <SidebarOption Icon={MailOutlineIcon} text="web3 research output" />
+      <SidebarOption Icon={BookmarkBorderIcon} text="web3 meme" />
+      <SidebarOption Icon={ListAltIcon} text="crypto and markets" />
+      <SidebarOption Icon={PermIdentityIcon} text="web3 phishing or irrelevant" />
+      <SidebarOption Icon={MoreHorizIcon} text="unknown" />
 
       {/* Button -> Tweet */}
       <Button variant="outlined" className="sidebar__tweet" fullWidth>
