@@ -1,0 +1,37 @@
+{
+    "posts":[
+        {
+            "displayName":"John Doe",
+            "username":"johndoe",
+            "avatar":"https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png",
+            "verified":true,
+            "image":"https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772240_1280.png",
+            "text":"This is a post"
+        },
+        {
+            "displayName":"John Doe",
+            "username":"johndoe",
+            "avatar":"https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png",
+            "verified":true,
+            "image":"https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772240_1280.png",
+            "text":"This is a post"
+        },
+        {
+            "displayName":"John Doe",
+            "username":"johndoe",
+            "avatar":"https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png",
+            "verified":true,
+            "image":"https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772240_1280.png",
+            "text":"This is a post"
+        },
+        {
+            "displayName":"John Doe",
+            "username":"johndoe",
+            "avatar":"https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png",
+            "verified":true,
+            "image":"https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772240_1280.png",
+            "text":"This is a post"
+        }
+    ]
+}
+
