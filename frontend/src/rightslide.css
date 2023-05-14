@@ -1,0 +1,15 @@
+.rightslide{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 5%;
+    height: 150px;
+}
+.text{
+    padding-bottom: 5%;
+}
+.button{
+    width: 50%;
+    
+}

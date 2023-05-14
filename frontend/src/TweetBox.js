@@ -3,12 +3,18 @@ import "./TweetBox.css";
 import { Avatar, Button } from "@material-ui/core";
 import db from "./firebase";
 
+
+
+// This is the box on top of the posts
 function TweetBox() {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
+  
 
   const sendTweet = (e) => {
     e.preventDefault();
+    console.log(process.env.SERVER)
+    console.log(process.env.NODE_ENV,1)
 
     db.collection("posts").add({
       displayName: "Rafeh Qazi",

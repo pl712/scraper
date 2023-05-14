@@ -6,7 +6,7 @@ import FlipMove from "react-flip-move";
 import data from "./data/posts_with_labels.json";
 import axios from 'axios'
 
-
+//post内容
 function Feed({ category }) {
   const [posts, setPosts] = useState([]);
 
@@ -21,8 +21,8 @@ function Feed({ category }) {
       <div className="feed__header">
         <h2>Crypto News Aggregator</h2>
       </div>
-
-      <TweetBox />
+      
+      {/* <TweetBox /> */}
 
       <FlipMove>
         {posts.map((post,index) => (
