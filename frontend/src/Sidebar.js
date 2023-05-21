@@ -32,7 +32,7 @@ function Sidebar({ onCategorySelect }) {
       <SidebarOption Icon={ListAltIcon} text="crypto and markets" onClick={() => onCategorySelect("Crypto and Markets")} />
       <SidebarOption Icon={PermIdentityIcon} text="web3 phishing or irrelevant"   onClick={() => onCategorySelect("web3 phishing or irrelevant")} />
       <SidebarOption Icon={MoreHorizIcon} text="unknown"  onClick={() => onCategorySelect("Unknown")} />
-
+    
       {/* Button -> Tweet */}
       <Button variant="outlined" className="sidebar__tweet" fullWidth>
         Tweet
